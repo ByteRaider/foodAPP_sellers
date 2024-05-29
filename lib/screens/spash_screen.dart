@@ -1,13 +1,30 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
+import '../authentication/auth_screen.dart';
+
 class MySplashScreen extends StatefulWidget {
-  MySplashScreen({Key? key}) : super(key: key);
+  const MySplashScreen({super.key});
 
   @override
-  _MySplashScreenState createState() => _MySplashScreenState();
+  MySplashScreenState createState() => MySplashScreenState();
 }
 
-class _MySplashScreenState extends State<MySplashScreen> {
+class MySplashScreenState extends State<MySplashScreen> {
+  startTimer() {
+    Timer(const Duration(seconds: 6), () async {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const AuthScreen()));
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -20,7 +37,11 @@ class _MySplashScreenState extends State<MySplashScreen> {
               padding: EdgeInsets.all(8.0),
               child: Text("Vende tu comida en linea",
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black))),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 40.0,
+                      letterSpacing: 3.0,
+                      fontFamily: "Signatra"))),
         ],
       ),
     );

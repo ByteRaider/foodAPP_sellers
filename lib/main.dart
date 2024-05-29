@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/spash_screen.dart';
 import 'theme/app_theme.dart';
 
 Future<void> main() async {
@@ -15,11 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: text,
       theme: AppTheme.lightTheme,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(text),
-        ),
-      ),
+      home: const MySplashScreen(),
     );
   }
 }
