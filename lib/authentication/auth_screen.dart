@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mexa_sellers_app/authentication/login.dart';
+import 'package:mexa_sellers_app/authentication/register.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -23,6 +25,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       stops: const [0.0, 1.0],
                       tileMode: TileMode.clamp)),
             ),
+            automaticallyImplyLeading: false, // hides leading widget icon
             title: const Text(
               "Vende tu comida en linea",
               style: TextStyle(fontFamily: "Lobster"),
@@ -54,8 +57,8 @@ class _AuthScreenState extends State<AuthScreen> {
             )),
             child: const TabBarView(
               children: [
-                Text("Login"),
-                Text("Register"),
+                LoginScreen(),
+                RegisterScreen(),
               ],
             ),
           ),
