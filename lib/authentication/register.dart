@@ -1,10 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mexa_sellers_app/theme/app_theme.dart';
-
-import '../widgets/custom_text_field.dart';
+import 'package:mexa_sellers_app/widgets/custom_text_field.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -28,8 +26,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-          padding: const EdgeInsets.all(2),
-          child: Column(mainAxisSize: MainAxisSize.max, children: [
+        padding: const EdgeInsets.all(2),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.1),
             InkWell(
               child: CircleAvatar(
@@ -89,11 +89,57 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     data: Icons.location_pin,
                     hintText: "Location",
                     isObscure: false,
+                    enabled: false,
                   ),
+                  Container(
+                    width: 400,
+                    height: 50,
+                    alignment: Alignment.center,
+                    child: ElevatedButton.icon(
+                      label: const Text(
+                        "Get my current location",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      icon: const Icon(
+                        Icons.location_on,
+                        color: AppTheme.iconCOlor2,
+                      ),
+                      onPressed: () => print("CLICKED"),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppTheme.background,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          )),
+                    ),
+                  )
                 ],
               ),
+            ), //form
+            const SizedBox(
+              height: 30,
             ),
-          ])),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.accent,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  )),
+              onPressed: () => print("clicked"),
+              child: const Text(
+                "Sign Up",
+                style: TextStyle(
+                  color: AppTheme.secondary,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+          ], //children
+        ),
+      ),
     );
   }
 }
