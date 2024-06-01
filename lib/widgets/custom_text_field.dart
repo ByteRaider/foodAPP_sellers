@@ -4,10 +4,11 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final IconData? data;
   final String? hintText;
-  bool? isObscure;
-  bool? enabled = true;
+  final bool? isObscure;
+  final bool? enabled = true;
 
-  CustomTextField({super.key, this.controller, this.data, this.hintText});
+  const CustomTextField(
+      {super.key, this.controller, this.data, this.hintText, this.isObscure});
 
   @override
   Widget build(BuildContext context) {
