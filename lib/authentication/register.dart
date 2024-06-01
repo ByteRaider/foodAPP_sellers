@@ -12,15 +12,26 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  // Form key
   final _formKey = GlobalKey<FormState>();
+  // Text Controllers
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController locationController = TextEditingController();
+  // Image Picker
   XFile? imageXFile;
   final ImagePicker _picker = ImagePicker();
+  // Image Picker Function
+  Future<void> _getImage() async {
+    // Allow user to pick image from gallery
+    imageXFile = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageXFile;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +43,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.1),
             InkWell(
+              onTap: () {
+                _getImage();
+              },
               child: CircleAvatar(
                 radius: MediaQuery.of(context).size.width * 0.20,
                 backgroundColor: AppTheme.primary,
