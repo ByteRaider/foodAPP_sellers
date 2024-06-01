@@ -12,7 +12,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final _globalKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -51,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 10,
             ),
             Form(
-              key: _globalKey,
+              key: _formKey,
               child: Column(
                 children: [
                   CustomTextField(
