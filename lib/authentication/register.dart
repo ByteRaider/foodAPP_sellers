@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mexa_sellers_app/theme/app_theme.dart';
 import 'package:mexa_sellers_app/widgets/custom_text_field.dart';
@@ -12,25 +14,50 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  // Form key
+// Form key
   final _formKey = GlobalKey<FormState>();
-  // Text Controllers
+// Text Controllers
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController locationController = TextEditingController();
-  // Image Picker
+//   Geo Location
+  Position? position;
+  List<Placemark> placeMarks = [];
+// Image Picker
   XFile? imageXFile;
   final ImagePicker _picker = ImagePicker();
-  // Image Picker Function
+
+// Image Picker Function
   Future<void> _getImage() async {
     // Allow user to pick image from gallery
     imageXFile = await _picker.pickImage(source: ImageSource.gallery);
     setState(() {
       imageXFile;
     });
+  }
+
+// Allow user to get geo location
+  getCurrentLocation() async {
+    // Check if location is enabled
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+    // Get Current Position
+    Position newPosition = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    position = newPosition;
+    // Get place marks
+    placeMarks =
+        await placemarkFromCoordinates(position!.latitude, position!.longitude);
+    Placemark pMark = placeMarks[0];
+    // Get complete address
+    String completeAddress =
+        '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
+    locationController.text = completeAddress;
   }
 
   @override
@@ -118,7 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Icons.location_on,
                         color: AppTheme.iconCOlor2,
                       ),
-                      onPressed: () => print("CLICKED"),
+                      onPressed: () => getCurrentLocation(),
                       style: ElevatedButton.styleFrom(
                           backgroundColor: AppTheme.background,
                           shape: RoundedRectangleBorder(
