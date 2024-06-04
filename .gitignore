@@ -2,6 +2,7 @@
 images/
 assets/
 # Miscellaneous
+.vscode
 *.class
 *.log
 *.pyc
