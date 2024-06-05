@@ -1,6 +1,8 @@
 # Dev
 images/
 assets/
+#Google Services
+android/app/google-services.json
 # Miscellaneous
 .vscode
 *.class
